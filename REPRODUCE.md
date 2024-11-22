@@ -39,7 +39,7 @@ Note that full replication of this dataset requires the following files that can
 
 * `"~/data/NI_DZ21.zip": Northern Ireland DataZones for 2021 (Shapefile)` 
 
-> [https://www.nisra.gov.uk/support/geography/data-zones-census-2021](https://spatialdata.gov.scot/geonetwork/srv/api/records/7d3e8709-98fa-4d71-867c-d5c8293823f2)
+> [https://www.nisra.gov.uk/support/geography/data-zones-census-2021](https://www.nisra.gov.uk/support/geography/data-zones-census-2021)
 
 * `"~/data/LAD_BUC_2022.gpkg": Local Authority Districts for 2022 (GeoPackage)` 
 
