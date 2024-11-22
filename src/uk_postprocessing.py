@@ -40,7 +40,6 @@ if __name__ == "__main__":
     oa_lookup = pd.read_csv("~/data/OA_lookup-2021.csv").drop(
         columns=["ObjectId", "LAD22CD", "LAD22NM"]
     )
-
     sdz = gpd.read_file("~/data/SG_DataZoneBdry_2011.zip")[
         ["DataZone", "Name", "geometry"]
     ].rename(columns={"DataZone": "DZ11CD", "Name": "DZ11NM"})
@@ -52,7 +51,6 @@ if __name__ == "__main__":
     lad = gpd.read_file("~/data/LAD_BUC_2022.gpkg")[["LAD22CD", "LAD22NM", "geometry"]]
 
     places = add_uk_attributes(places, oa, oa_lookup, sdz, nidz, lad)
-    print(places.columns)
     places = places.drop(
         columns=[
             "names_language",
@@ -62,6 +60,7 @@ if __name__ == "__main__":
             "LAD22NMW", 
             "MSOA21NMW", 
             "LSOA21NMW"
-        ]
+        ],
+        errors="ignore" #ignore if column does not exist
     )
     places.to_parquet(f"./data/processed/{filename}_admin.parquet", index=False)
