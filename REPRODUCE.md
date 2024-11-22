@@ -31,7 +31,7 @@ Note that full replication of this dataset requires the following files that can
 
 * `"~/data/OA_lookup-2021.csv": Output Areas lookup for 2021 (CSV)` 
 
-> [https://geoportal.statistics.gov.uk/maps/4d6cf4e41ec845f6bdf5056499c37578_0](https://geoportal.statistics.gov.uk/maps/4d6cf4e41ec845f6bdf5056499c37578_0)
+> [https://geoportal.statistics.gov.uk/datasets/b9ca90c10aaa4b8d9791e9859a38ca67_0/](https://geoportal.statistics.gov.uk/datasets/b9ca90c10aaa4b8d9791e9859a38ca67_0/)
 
 * `"~/data/SG_DataZoneBdry_2011.zip": Scotland DataZones for 2011 (Shapefile)` 
 
