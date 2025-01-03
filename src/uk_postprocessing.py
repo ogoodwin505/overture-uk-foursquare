@@ -64,3 +64,9 @@ if __name__ == "__main__":
         errors="ignore" #ignore if column does not exist
     )
     places.to_parquet(f"./data/processed/{filename}_admin.parquet", index=False)
+    ori_len = len(places)
+    #drop closed places
+    places = places[places.date_closed.isnull()]
+    print(f"All places: {ori_len}")
+    print(f"Removed {ori_len - len(places)} closed places")
+    places.to_parquet(f"./data/processed/{filename}_admin_open.parquet", index=False)

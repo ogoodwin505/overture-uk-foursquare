@@ -56,6 +56,7 @@ COPY (
         AND bbox.miny > {args.miny}
         AND bbox.maxy < {args.maxy}
     ) TO 'data/raw/{filename}.gpkg' -- can't use parquet yet
+    
 WITH (FORMAT GDAL, DRIVER 'GPKG');
 """
 
