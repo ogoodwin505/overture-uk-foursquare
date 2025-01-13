@@ -1,0 +1,22 @@
+schema: '2.0'
+stages:
+  query:
+    cmd: python -m src.query_foursquare --minx -125.9 --maxx 129.5 --miny -34.4 --maxy
+      38.7 --filename uk_foursquare_korea
+    outs:
+    - path: ./data/raw/uk_foursquare_korea.gpkg
+      hash: md5
+      md5: ba88951b4cb4c84e420af8a7b636f309
+      size: 135168
+  clean:
+    cmd: python -m src.clean_foursquare --filename uk_foursquare_korea
+    deps:
+    - path: ./data/raw/uk_foursquare_korea.gpkg
+      hash: md5
+      md5: ba88951b4cb4c84e420af8a7b636f309
+      size: 135168
+    outs:
+    - path: data/processed/uk_foursquare_korea.parquet
+      hash: md5
+      md5: 84a4c4bbd02b2ed76a710516a305e621
+      size: 51728
