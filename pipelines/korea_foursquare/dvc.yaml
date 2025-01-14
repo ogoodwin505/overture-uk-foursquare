@@ -8,6 +8,7 @@ stages:
       python -m src.query_foursquare_bycc
       --countrycode ${countrycode}
       --filename ${filename}
+      --local ${local}
     outs:
       - ./data/raw/${filename}.gpkg
   clean:

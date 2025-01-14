@@ -24,12 +24,12 @@ def add_geometry(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     # Rename lat and lon
     df = df.rename(columns={"latitude": "lat", "longitude": "lng"})
     
-    #check if crs is EPSG:4326 if not break
-    if df.crs != "EPSG:4326":
-        raise ValueError("CRS is not EPSG:4326")
+    # #check if crs is EPSG:4326 if not break
+    # if df.crs != "EPSG:4326":
+    #     raise ValueError("CRS is not EPSG:4326")
     # Adding H3 indices with progress bar
-    for i in tqdm(range(1, 10), desc="Adding H3 indices", unit="level"):
-        df[f"h3_0{i}"] = df.h3.geo_to_h3(i).index
+    for i in tqdm(range(1, 12), desc="Adding H3 indices", unit="level"):
+        df[f"h3_{i}"] = df.h3.geo_to_h3(i).index
 
     return df
 

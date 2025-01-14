@@ -1,24 +1,25 @@
 schema: '2.0'
 stages:
   query:
-    cmd: python -m src.query_foursquare --countrycode KR --filename korea_foursquare
+    cmd: python -m src.query_foursquare_bycc --countrycode KR --filename korea_foursquare
+      --local true
     outs:
     - path: ./data/raw/korea_foursquare.gpkg
       hash: md5
-      md5: ca5f88c51b5317d5a80b68af9c695523
-      size: 98304
+      md5: 5400a448711a2ef7e7e797f5fcc5f1d3
+      size: 524763136
   clean:
     cmd: python -m src.clean_foursquare --filename korea_foursquare
     deps:
     - path: ./data/raw/korea_foursquare.gpkg
       hash: md5
-      md5: ca5f88c51b5317d5a80b68af9c695523
-      size: 98304
+      md5: 5400a448711a2ef7e7e797f5fcc5f1d3
+      size: 524763136
     outs:
     - path: data/processed/korea_foursquare.parquet
       hash: md5
-      md5: ea6f60c92c69aed65438ee8a6d159cf6
-      size: 27829
+      md5: 80c22d1d4d4a56f81c0480502cd74d67
+      size: 226626616
   addcats:
     cmd: python -m src.explodecats_foursquare --filename korea_foursquare
     deps:
@@ -31,3 +32,15 @@ stages:
       hash: md5
       md5: 75f281ab04b6f4c77966239093dcbd3d
       size: 40068
+  korea_postprocessing:
+    cmd: python -m src.korea_postprocessing --filename korea_foursquare
+    deps:
+    - path: ./data/processed/korea_foursquare.parquet
+      hash: md5
+      md5: 80c22d1d4d4a56f81c0480502cd74d67
+      size: 226626616
+    outs:
+    - path: ./data/processed/korea_foursquare_open.parquet
+      hash: md5
+      md5: 3fbe7b9fac4575c5c90800a675041ef0
+      size: 218633128

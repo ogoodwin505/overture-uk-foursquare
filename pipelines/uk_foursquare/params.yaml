@@ -1,6 +1,3 @@
-filename: uk_foursquare_test_projquery
-bounds:
-  minx: -9.0
-  maxx: 2.01
-  miny: 49.75
-  maxy: 61.01
+filename: uk_foursquare_cc
+countrycode: 'GB'
+local: true

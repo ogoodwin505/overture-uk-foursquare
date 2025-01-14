@@ -5,8 +5,8 @@ stages:
   query:
     wdir: ../../
     cmd: >-
-      python -m src.query_foursquare
-      ${bounds}
+      python -m src.query_foursquare_bycc
+      --countrycode ${countrycode}
       --filename ${filename}
     outs:
       - ./data/raw/${filename}.gpkg
