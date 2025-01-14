@@ -59,7 +59,17 @@ if __name__ == "__main__":
     places = add_geometry(places)
     places = add_list_cols(places, ["fsq_category_ids", "fsq_category_labels"])
 
-    # Save the processed data to parquet file
-    places.to_parquet(f"./data/processed/{filename}.parquet")
+    # Exploding the 'fsq_category_ids' column
+    places_exploded = places.explode('fsq_category_ids').reset_index(drop=True)
+    # Rename column to sing
+    places_exploded = places_exploded.rename(columns={'fsq_category_ids': 'fsq_category_id'})    
 
+    #load the cat data
+    file_path = 's3://fsq-os-places-us-east-1/release/dt=2024-12-03/categories/parquet'
+    cats = pd.read_parquet(file_path, storage_options={"anon": True})
+#join the two dataframes on category_id
+    places_exploded = places_exploded.merge(cats, left_on='fsq_category_id', right_on='category_id', how='left')
+
+    # Save the processed data to parquet file
+    places_exploded.to_parquet(f"./data/processed/{filename}.parquet")
     print(f"Processing complete. Data saved to './data/processed/{filename}.parquet'")

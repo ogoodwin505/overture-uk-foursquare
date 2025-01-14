@@ -5,8 +5,8 @@ stages:
   query:
     wdir: ../../
     cmd: >-
-      python -m src.query_foursquare
-      ${bounds}
+      python -m src.query_foursquare_bycc
+      --countrycode ${countrycode}
       --filename ${filename}
     outs:
       - ./data/raw/${filename}.gpkg
@@ -19,4 +19,16 @@ stages:
       --filename ${filename}
     outs:
       - data/processed/${filename}.parquet
+  korea_postprocessing:
+    wdir: ../../
+    deps:
+      - ./data/processed/${filename}.parquet
+    cmd: >-
+      python -m src.korea_postprocessing
+      --filename ${filename}
+    outs:
+      - ./data/processed/${filename}_open.parquet
+
+
+
 
