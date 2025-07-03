@@ -1,34 +1,33 @@
 schema: '2.0'
 stages:
   query:
-    cmd: python -m src.query_foursquare --minx -9.0 --maxx 2.01 --miny 49.75 --maxy
-      61.01 --filename uk_foursquare_test_projquery
+    cmd: python -m src.query_foursquare_bycc --countrycode GB --filename uk_foursquare_cc
     outs:
-    - path: ./data/raw/uk_foursquare_test_projquery.gpkg
+    - path: ./data/raw/uk_foursquare_cc.gpkg
       hash: md5
-      md5: ec2edbd29c754e67e8f1f418ee752fc3
-      size: 139264
+      md5: b6d58da2b8ef9545417ec4c13eb4ee3e
+      size: 1594703872
   clean:
-    cmd: python -m src.clean_foursquare --filename uk_foursquare_test_proj
+    cmd: python -m src.clean_foursquare --filename uk_foursquare_cc
     deps:
-    - path: ./data/raw/uk_foursquare_test_proj.gpkg
+    - path: ./data/raw/uk_foursquare_cc.gpkg
       hash: md5
-      md5: c0c30825a58ac3986980de60f012dbcd
-      size: 139264
+      md5: b6d58da2b8ef9545417ec4c13eb4ee3e
+      size: 1594703872
     outs:
-    - path: data/processed/uk_foursquare_test_proj.parquet
+    - path: data/processed/uk_foursquare_cc.parquet
       hash: md5
-      md5: 78ccba911318bfccc823eeec41af08d5
-      size: 47232
+      md5: c3cf635db3ddae116d602422c36d780a
+      size: 535553998
   uk_postprocessing:
-    cmd: python -m src.uk_postprocessing --filename uk_foursquare_test_proj
+    cmd: python -m src.uk_postprocessing --filename uk_foursquare_cc
     deps:
-    - path: ./data/processed/uk_foursquare_test_proj.parquet
+    - path: ./data/processed/uk_foursquare_cc.parquet
       hash: md5
-      md5: 78ccba911318bfccc823eeec41af08d5
-      size: 47232
+      md5: c3cf635db3ddae116d602422c36d780a
+      size: 535553998
     outs:
-    - path: ./data/processed/uk_foursquare_test_proj_admin.parquet
+    - path: ./data/processed/uk_foursquare_cc_admin.parquet
       hash: md5
-      md5: e7fd6876e59b293275886805a3260319
-      size: 68860
+      md5: 1d2ba3e970c71beb1912b36147a5c42c
+      size: 616385522

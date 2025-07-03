@@ -25,7 +25,7 @@ raw_dir.mkdir(parents=True, exist_ok=True)
 processed_dir.mkdir(parents=True, exist_ok=True)
 
 # Set file location
-location = 'data/downloaded/places*.zstd.parquet' if args.local else "s3://fsq-os-places-us-east-1/release/dt=2025-01-10/places/parquet/*"
+location = 'data/downloaded/places*.zstd.parquet' if args.local else "s3://fsq-os-places-us-east-1/release/dt=2025-06-10/places/parquet/*"
 
         # ST_Point(longitude, latitude) AS geometry, -- Create geometry column
 # Query to filter data and write output
@@ -63,6 +63,7 @@ COPY (
         twitter,
         CAST(fsq_category_ids AS JSON) AS fsq_category_ids,
         CAST(fsq_category_labels AS JSON) AS fsq_category_labels,
+        CAST(unresolved_flags AS JSON) AS unresolved_flags,
         ST_GeomFromWKB(geom)
     FROM
         read_parquet('{location}')

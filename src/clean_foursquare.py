@@ -57,7 +57,7 @@ if __name__ == "__main__":
     print(f"Data loaded from './data/raw/{filename}.gpkg'")
     # Apply the functions with progress bars
     places = add_geometry(places)
-    places = add_list_cols(places, ["fsq_category_ids", "fsq_category_labels"])
+    places = add_list_cols(places, ["fsq_category_ids", "fsq_category_labels","unresolved_flags"])
 
     # Exploding the 'fsq_category_ids' column
     places_exploded = places.explode('fsq_category_ids').reset_index(drop=True)

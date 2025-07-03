@@ -36,19 +36,19 @@ def remove_list_cols(df: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
 
 if __name__ == "__main__":
     places = gpd.read_parquet(f"./data/processed/{filename}.parquet")
-    oa = gpd.read_file("~/data/OA_2021_BGC.gpkg")[["OA21CD", "geometry"]]
-    oa_lookup = pd.read_csv("~/data/OA_lookup-2021.csv").drop(
+    oa = gpd.read_file("./data/OA_2021_BGC.gpkg")[["OA21CD", "geometry"]]
+    oa_lookup = pd.read_csv("./data/OA_lookup-2021.csv").drop(
         columns=["ObjectId", "LAD22CD", "LAD22NM"]
     )
-    sdz = gpd.read_file("~/data/SG_DataZoneBdry_2011.zip")[
+    sdz = gpd.read_file("./data/SG_DataZoneBdry_2011.zip")[
         ["DataZone", "Name", "geometry"]
     ].rename(columns={"DataZone": "DZ11CD", "Name": "DZ11NM"})
     nidz = (
-        gpd.read_file("~/data/NI_DZ21.zip")
+        gpd.read_file("./data/NI_DZ21.zip")
         .drop(columns=["Area_ha", "Perim_km"])
         .to_crs("EPSG: 27700")
     )
-    lad = gpd.read_file("~/data/LAD_BUC_2022.gpkg")[["LAD22CD", "LAD22NM", "geometry"]]
+    lad = gpd.read_file("./data/LAD_BUC_2022.zip")[["LAD22CD", "LAD22NM", "geometry"]]
 
     places = add_uk_attributes(places, oa, oa_lookup, sdz, nidz, lad)
     places = places.drop(
